@@ -1,0 +1,65 @@
+// Calculadora HOC2
+package calculadorahoc2;
+import java_cup.runtime.*;
+import java.io.FileReader;
+
+class AnalizadorSintactico;
+
+parser code {:
+    HOC2JFrame frmInterfaz;
+    Float variables[] = new Float[26];
+
+    public void report_error(String mensaje, Object info){
+        StringBuilder m = new StringBuilder("Error");
+        if(info instanceof java_cup.runtime.Symbol){
+            java_cup.runtime.Symbol s = (java_cup.runtime.Symbol) info;
+            if(s.left >= 0){
+                m.append(" en la linea "+(s.left+1));
+                if(s.right >= 0)
+                    m.append(", columna "+(s.right+1));
+            }
+        }
+        m.append(" : "+mensaje);
+        System.err.println(m);
+    }
+
+    public void report_fatal_error(String mssg, Object info){
+        report_error(mssg, info);
+        System.exit(1);
+    }
+
+:}
+
+terminal opSUMA, opRESTA, opMULT, opDIV, ASIG;
+terminal ParIzq, ParDer, ENTER;
+terminal Float NUM;
+terminal Integer VAR;
+terminal UMINUS;
+
+non terminal list;
+non terminal Float asgn, expr;
+
+// Precedencias
+precedence right ASIG;
+precedence left opSUMA, opRESTA;
+precedence left opMULT, opDIV;
+precedence left UMINUS;
+
+list    ::=
+        | ENTER
+        | list expr:e ENTER         {: frmInterfaz.PonerTextSintac(Float.toString(e)+"\n"); :}
+        ;
+
+asgn    ::= VAR:index ASIG expr:e   {: variables[index]=e; RESULT=e; :}
+        ;
+
+expr    ::= NUM:valNum              {: RESULT=valNum; :}
+        | VAR:index                 {: RESULT=variables[index]; :}
+        | asgn:valAsgn              {: RESULT=valAsgn; :}
+        | expr:e1 opSUMA expr:e2    {: RESULT=e1+e2; :}
+        | expr:e1 opRESTA expr:e2   {: RESULT=e1-e2; :}
+        | expr:e1 opMULT expr:e2    {: RESULT=e1*e2; :}
+        | expr:e1 opDIV expr:e2     {: RESULT=e1/e2; :}
+        | ParIzq expr:e ParDer      {: RESULT=e; :}
+        | opRESTA expr:e            {: RESULT=-e; :} %prec UMINUS
+        ;
