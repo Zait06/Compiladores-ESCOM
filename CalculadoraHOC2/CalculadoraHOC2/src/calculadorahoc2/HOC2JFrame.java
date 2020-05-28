@@ -168,6 +168,9 @@ public class HOC2JFrame extends javax.swing.JFrame {
                     CadAux = "Token: "+CadAux+"\tIdentToken: FIN\n";
                 else{
                     switch(simb.sym){
+                        case AnalizadorSintacticoSym.SEMICOLON:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: SEMICOLON\t Lexema: "+Lexema+"\n";
+                        break;
                         case AnalizadorSintacticoSym.ENTER:
                             CadAux = "Token: "+CadAux+"\tIdentToken: Enter\t Lexema: "+Lexema+"\n";
                         break;
@@ -209,7 +212,7 @@ public class HOC2JFrame extends javax.swing.JFrame {
                 txtLexico.append(CadAux);
             }while(simb.sym != AnalizadorSintacticoSym.EOF);
         }catch(IOException ex){
-            txtLexico.append("Entro al catch");
+            txtLexico.append("Entro\' al catch");
             Logger.getLogger(HOC2JFrame.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_BotonLexicoActionPerformed

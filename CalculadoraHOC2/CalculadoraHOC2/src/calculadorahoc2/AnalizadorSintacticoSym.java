@@ -8,17 +8,18 @@ package calculadorahoc2;
 /** CUP generated class containing symbol constants. */
 public class AnalizadorSintacticoSym {
   /* terminals */
-  public static final int NUM = 10;
+  public static final int NUM = 11;
   public static final int ParDer = 8;
-  public static final int UMINUS = 12;
+  public static final int UMINUS = 13;
   public static final int ENTER = 9;
   public static final int EOF = 0;
   public static final int opRESTA = 3;
-  public static final int VAR = 11;
+  public static final int VAR = 12;
   public static final int opSUMA = 2;
   public static final int ASIG = 6;
   public static final int opMULT = 4;
   public static final int error = 1;
+  public static final int SEMICOLON = 10;
   public static final int opDIV = 5;
   public static final int ParIzq = 7;
   public static final String[] terminalNames = new String[] {
@@ -32,6 +33,7 @@ public class AnalizadorSintacticoSym {
   "ParIzq",
   "ParDer",
   "ENTER",
+  "SEMICOLON",
   "NUM",
   "VAR",
   "UMINUS"
