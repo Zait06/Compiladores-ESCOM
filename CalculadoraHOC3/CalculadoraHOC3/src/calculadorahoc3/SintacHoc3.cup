@@ -25,8 +25,42 @@ parser code {:
 
     public void report_fatal_error(String mssg, Object info){
         report_error(mssg, info);
-        System.exit(1);
-    } 
+        // System.exit(1);
+    }
+
+    public Float findFunction(Integer index, Float dato){
+        Float resultado = new Float(0);
+        switch(index){
+            case 1:
+                resultado = new Float(Math.sin(dato));
+            break;
+            case 2:
+                resultado = new Float(Math.cos(dato));
+            break;
+            case 3:
+                resultado = new Float(Math.atan(dato));
+            break;
+            case 4:
+                resultado = new Float(Math.log(dato));
+            break;
+            case 5:
+                resultado = new Float(Math.log10(dato));
+            break;
+            case 6:
+                resultado = new Float(Math.exp(dato));
+            break;
+            case 7:
+                resultado = new Float(Math.sqrt(dato));
+            break;
+            case 8:
+                resultado = new Float(Math.abs(dato));
+            break;
+            default:
+                resultado = new Float(0);
+            break;
+        }
+        return resultado;
+    }
 
 :}
 
@@ -35,6 +69,7 @@ terminal ParIzq, ParDer, ENTER, SEMICOLON;
 terminal Float NUM;
 terminal Float CONSTS;
 terminal Integer VAR;
+terminal Integer BLTIN;
 terminal UMINUS, POW;
 
 non terminal list;
@@ -53,18 +88,19 @@ list    ::=
         | list expr:e SEMICOLON ENTER       {: frmInterfaz.PonerTextSintac(Float.toString(e)+"\n"); :}
         ;
 
-asgn    ::= VAR:index ASIG expr:e   {: variables[index]=e; RESULT=e; :}
+asgn    ::= VAR:index ASIG expr:e           {: variables[index]=e; RESULT=e; :}
         ;
 
-expr    ::= NUM:valNum              {: RESULT=valNum; :}
-        | VAR:index                 {: RESULT=variables[index]; :}
-        | asgn:valAsgn              {: RESULT=valAsgn; :}
-        | expr:e1 opSUMA expr:e2    {: RESULT=e1+e2; :}
-        | expr:e1 opRESTA expr:e2   {: RESULT=e1-e2; :}
-        | expr:e1 opMULT expr:e2    {: RESULT=e1*e2; :}
-        | expr:e1 opDIV expr:e2     {: RESULT=e1/e2; :}
-        | ParIzq expr:e ParDer      {: RESULT=e; :}
-        | opRESTA expr:e            {: RESULT=-e; :} %prec UMINUS
-        | expr:e1 POW expr:e2       {: RESULT=(float) Math.pow(e1,e2); :}
-        | CONSTS:co                 {: RESULT=co; :}
+expr    ::= NUM:valNum                      {: RESULT=valNum; :}
+        | VAR:index                         {: RESULT=variables[index]; :}
+        | asgn:valAsgn                      {: RESULT=valAsgn; :}
+        | expr:e1 opSUMA expr:e2            {: RESULT=e1+e2; :}
+        | expr:e1 opRESTA expr:e2           {: RESULT=e1-e2; :}
+        | expr:e1 opMULT expr:e2            {: RESULT=e1*e2; :}
+        | expr:e1 opDIV expr:e2             {: RESULT=e1/e2; :}
+        | ParIzq expr:e ParDer              {: RESULT=e; :}
+        | opRESTA expr:e                    {: RESULT=-e; :} %prec UMINUS
+        | expr:e1 POW expr:e2               {: RESULT=(float) Math.pow(e1,e2); :}
+        | CONSTS:co                         {: RESULT=co; :}
+        | BLTIN:fun ParIzq expr:e ParDer    {: Float elec=findFunction(fun,e); RESULT=elec; :}
         ;

@@ -4,7 +4,8 @@ package calculadorahoc3;
 **/
 public class CalculadoraHOC3 {
     public static void main(String[] args) {
-        HOC3JFrame interfaz=new HOC3JFrame();
+        HOC3JFrame interfaz = new HOC3JFrame();
         interfaz.setVisible(true);
-    }   
+        System.out.println(Math.sin(Math.PI/2));
+    }  
 }

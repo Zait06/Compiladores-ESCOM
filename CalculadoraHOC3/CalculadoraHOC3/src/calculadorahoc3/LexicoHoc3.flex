@@ -38,6 +38,16 @@ import java.io.Reader;
         }
         return res;
     }
+
+    private int findIndexFunction(String nameFunc){
+        int i;
+        String funciones[] = {"sin","cos","atan","log","log10","exp","sqrt","abs"};
+        for(i=0;i<8;i++){
+            if(nameFunc.equals(funciones[i]))
+                break;
+        };
+        return i+1;
+    }
 %}
 
 LetraMin=[a-z]
@@ -46,22 +56,25 @@ LetraMay=[A-Z]
 
 %%
 
-[ \t]+                  {;}
-";"                     {return symbol(AnalizadorSintacticoSym.SEMICOLON);}
-"\n"                    {return symbol(AnalizadorSintacticoSym.ENTER);}
-{Digito}+(\.{Digito}+)? {return symbol(AnalizadorSintacticoSym.NUM,new Float(yytext()));}
-"="                     {return symbol(AnalizadorSintacticoSym.ASIG);}
-"/"                     {return symbol(AnalizadorSintacticoSym.opDIV);}
-"*"                     {return symbol(AnalizadorSintacticoSym.opMULT);}
-"-"                     {return symbol(AnalizadorSintacticoSym.opRESTA);}
-"+"                     {return symbol(AnalizadorSintacticoSym.opSUMA);}
-")"                     {return symbol(AnalizadorSintacticoSym.ParDer);}
-"("                     {return symbol(AnalizadorSintacticoSym.ParIzq);}
-"^"                     {return symbol(AnalizadorSintacticoSym.POW);}
-{LetraMin}              {int IndVar; 
-                        IndVar=(int)(yytext().charAt(0))-(int)'a'; 
-                        return symbol(AnalizadorSintacticoSym.VAR,new Integer(IndVar));}
-{LetraMay}+             {Float val;
-                        val=findConst(yytext());
-                        return symbol(AnalizadorSintacticoSym.CONSTS,val);}
+[ \t]+                          {;}
+";"                             {return symbol(AnalizadorSintacticoSym.SEMICOLON);}
+"\n"                            {return symbol(AnalizadorSintacticoSym.ENTER);}
+{Digito}+(\.{Digito}+)?         {return symbol(AnalizadorSintacticoSym.NUM,new Float(yytext()));}
+"="                             {return symbol(AnalizadorSintacticoSym.ASIG);}
+"/"                             {return symbol(AnalizadorSintacticoSym.opDIV);}
+"*"                             {return symbol(AnalizadorSintacticoSym.opMULT);}
+"-"                             {return symbol(AnalizadorSintacticoSym.opRESTA);}
+"+"                             {return symbol(AnalizadorSintacticoSym.opSUMA);}
+")"                             {return symbol(AnalizadorSintacticoSym.ParDer);}
+"("                             {return symbol(AnalizadorSintacticoSym.ParIzq);}
+"^"                             {return symbol(AnalizadorSintacticoSym.POW);}
+{LetraMin}                      {int IndVar; 
+                                IndVar=(int)(yytext().charAt(0))-(int)'a'; 
+                                return symbol(AnalizadorSintacticoSym.VAR,new Integer(IndVar));}
+{LetraMay}+                     {Float val;
+                                val=findConst(yytext());
+                                return symbol(AnalizadorSintacticoSym.CONSTS,val);}
+{LetraMin}+({Digito}{Digito})?  {int indFunc;
+                                indFunc=findIndexFunction(yytext());
+                                return symbol(AnalizadorSintacticoSym.BLTIN,new Integer(indFunc));}
 . {return symbol(AnalizadorSintacticoSym.error);}

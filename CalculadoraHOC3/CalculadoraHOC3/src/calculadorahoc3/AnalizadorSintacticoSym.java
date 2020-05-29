@@ -9,9 +9,9 @@ package calculadorahoc3;
 public class AnalizadorSintacticoSym {
   /* terminals */
   public static final int NUM = 11;
-  public static final int POW = 15;
+  public static final int POW = 16;
   public static final int ParDer = 8;
-  public static final int UMINUS = 14;
+  public static final int UMINUS = 15;
   public static final int ENTER = 9;
   public static final int CONSTS = 12;
   public static final int EOF = 0;
@@ -23,6 +23,7 @@ public class AnalizadorSintacticoSym {
   public static final int error = 1;
   public static final int SEMICOLON = 10;
   public static final int opDIV = 5;
+  public static final int BLTIN = 14;
   public static final int ParIzq = 7;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -39,6 +40,7 @@ public class AnalizadorSintacticoSym {
   "NUM",
   "CONSTS",
   "VAR",
+  "BLTIN",
   "UMINUS",
   "POW"
   };
