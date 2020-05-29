@@ -31,7 +31,7 @@ parser code {:
 :}
 
 terminal opSUMA, opRESTA, opMULT, opDIV, ASIG;
-terminal ParIzq, ParDer, ENTER;
+terminal ParIzq, ParDer, ENTER, SEMICOLON;
 terminal Float NUM;
 terminal Integer VAR;
 terminal UMINUS;
@@ -47,7 +47,8 @@ precedence left UMINUS;
 
 list    ::=
         | ENTER
-        | list expr:e ENTER         {: frmInterfaz.PonerTextSintac(Float.toString(e)+"\n"); :}
+        | list expr:e SEMICOLON             {: frmInterfaz.PonerTextSintac(Float.toString(e)+"\n"); :}
+        | list expr:e SEMICOLON ENTER       {: frmInterfaz.PonerTextSintac(Float.toString(e)+"\n"); :}
         ;
 
 asgn    ::= VAR:index ASIG expr:e   {: variables[index]=e; RESULT=e; :}

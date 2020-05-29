@@ -26,6 +26,7 @@ Digito=[0-9]
 %%
 
 [ \t]+                  {;}
+";"                     {return symbol(AnalizadorSintacticoSym.SEMICOLON);}
 "\n"                    {return symbol(AnalizadorSintacticoSym.ENTER);}
 {Digito}+(\.{Digito}+)? {return symbol(AnalizadorSintacticoSym.NUM,new Float(yytext()));}
 "="                     {return symbol(AnalizadorSintacticoSym.ASIG);}

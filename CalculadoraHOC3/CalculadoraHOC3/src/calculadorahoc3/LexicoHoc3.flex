@@ -41,8 +41,8 @@ import java.io.Reader;
 
     private int findIndexFunction(String nameFunc){
         int i;
-        String funciones[] = {"sin","cos","atan","log","log10","exp","sqrt","abs"};
-        for(i=0;i<8;i++){
+        String funciones[] = {"sin","cos","atan","log","log10","exp","sqrt","int","abs"};
+        for(i=0;i<9;i++){
             if(nameFunc.equals(funciones[i]))
                 break;
         };
