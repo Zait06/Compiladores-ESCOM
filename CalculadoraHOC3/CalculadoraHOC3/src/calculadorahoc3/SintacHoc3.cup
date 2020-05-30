@@ -81,7 +81,7 @@ precedence right ASIG;
 precedence left opSUMA, opRESTA;
 precedence left opMULT, opDIV;
 precedence left UMINUS;
-precedence left POW;
+precedence right POW;
 
 list    ::=
         | ENTER
