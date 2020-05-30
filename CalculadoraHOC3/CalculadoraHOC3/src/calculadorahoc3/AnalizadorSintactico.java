@@ -191,13 +191,11 @@ public class AnalizadorSintactico extends java_cup.runtime.lr_parser {
                 resultado = new Float(Math.sqrt(dato));
             break;
             case 8:
-                resultado = new Float(new Integer(dato));
+                int aux = (int)(float) dato;
+                resultado = new Float(aux);
             break;
             case 9:
                 resultado = new Float(Math.abs(dato));
-            break;
-            default:
-                resultado = new Float(0);
             break;
         }
         return resultado;

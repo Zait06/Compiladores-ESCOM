@@ -194,7 +194,7 @@ public class HOC3JFrame extends javax.swing.JFrame {
                             CadAux = "Token: "+CadAux+"\tIdentToken: MULT\t Lexema: "+Lexema+"\n";
                         break;
                         case AnalizadorSintacticoSym.opDIV:
-                            CadAux = "Token: "+CadAux+"\tIdentToken: DIV\t Lexema: "+Lexema+"\n";
+                            CadAux = "Token: "+CadAux+"\tIdentToken: DIV\t\t Lexema: "+Lexema+"\n";
                         break;
                         case AnalizadorSintacticoSym.ASIG:
                             CadAux = "Token: "+CadAux+"\tIdentToken: ASIG\t Lexema: "+Lexema+"\n";
@@ -210,6 +210,9 @@ public class HOC3JFrame extends javax.swing.JFrame {
                         break;
                         case AnalizadorSintacticoSym.POW:
                             CadAux = "Token: "+CadAux+"\tIdentToken: POW\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.BLTIN:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: BLTIN\t Lexema: "+Lexema+"\n";
                         break;
                         case AnalizadorSintacticoSym.CONSTS:
                             CadAux = "Token: "+CadAux+"\tIdentToken: CONSTS\t Lexema: "+Lexema+"\n";
