@@ -1,4 +1,4 @@
-// Calculadora HOC2
+// Analizador sintactico
 package calculadorahoc3;
 import java_cup.runtime.*;
 import java.io.FileReader;
