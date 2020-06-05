@@ -44,8 +44,18 @@ public class HOC4JFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BotonSalir.setText("Salir");
+        BotonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSalirActionPerformed(evt);
+            }
+        });
 
         BotonLimpiar.setText("Limpiar");
+        BotonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonLimpiarActionPerformed(evt);
+            }
+        });
 
         txtArea.setColumns(20);
         txtArea.setRows(5);
@@ -60,6 +70,11 @@ public class HOC4JFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txtSintactico);
 
         BotonLexico.setText("Analizar Lexicamente");
+        BotonLexico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonLexicoActionPerformed(evt);
+            }
+        });
 
         BotonSintactico.setText("Analizar Sintacticamente");
         BotonSintactico.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +140,7 @@ public class HOC4JFrame extends javax.swing.JFrame {
         InstrucProgram instruc;
         AnalizadorLexico Lexic = null;
         try{
-            Lexic = new AnalizadorLexico(new FileReader("ArchEntrada.txt"));
+            Lexic = new AnalizadorLexico(new FileReader("./ArchEntrada.txt"));
         }catch(FileNotFoundException ex){
             Logger.getLogger(HOC4JFrame.class.getName()).log(Level.SEVERE,null,ex);
         }
@@ -141,7 +156,7 @@ public class HOC4JFrame extends javax.swing.JFrame {
                 s = (SymbolHOC) it.next();
             }*/
             Object result = Sintac.parse().value;
-            txtArea.append("\nFin de analisis sintactico");
+            txtSintactico.append("\nFin de analisis sintactico");
             
             for(int i=0;i<Sintac.maquinaHoc4.progp;i++){
                 instruc = Sintac.maquinaHoc4.Prog[i];
@@ -190,7 +205,7 @@ public class HOC4JFrame extends javax.swing.JFrame {
                             break;
                         }
                         cadAux+='\n';
-                        txtArea.append(cadAux);
+                        txtSintactico.append(cadAux);
                     break;
                     case BLTIN:
                         switch(instruc.func_BLTIN){
@@ -223,7 +238,13 @@ public class HOC4JFrame extends javax.swing.JFrame {
                             break;
                         }
                         cadAux+='\n';
-                        txtArea.append(cadAux);
+                        txtSintactico.append(cadAux);
+                    break;
+                    case SYMBOL:
+                        cadAux = "Symbol name: "+instruc.symbolHoc.name+
+                                 " val = "+Float.toString(instruc.symbolHoc.val);
+                        cadAux += "\n";
+                        txtSintactico.append(cadAux);
                     break;
                 }
             }
@@ -232,6 +253,106 @@ public class HOC4JFrame extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//GEN-LAST:event_BotonSintacticoActionPerformed
+
+    private void BotonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLimpiarActionPerformed
+        txtArea.setText("");
+        txtLexico.setText("");
+        txtSintactico.setText("");
+    }//GEN-LAST:event_BotonLimpiarActionPerformed
+
+    private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_BotonSalirActionPerformed
+
+    private void BotonLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLexicoActionPerformed
+        Symbol simb;
+        String Lexema = new String();
+        String CadAux = new String();
+        File ArchEntrada = new File("./ArchEntrada.txt");
+        PrintWriter escribir;
+        txtLexico.setText("");
+        txtSintactico.setText("");
+        try{
+            escribir = new PrintWriter(ArchEntrada);
+            escribir.print(txtArea.getText());
+            escribir.close();
+        }catch(FileNotFoundException ex){
+            Logger.getLogger(HOC4JFrame.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        
+        System.out.println("Eco");
+        
+        try{
+            Reader lector;
+            lector = new BufferedReader(new FileReader("./ArchEntrada.txt"));
+            
+            AnalizadorLexico AnalysLex = new AnalizadorLexico(lector);
+            
+            do{
+                simb = AnalysLex.next_token();
+                CadAux = Integer.toString(simb.sym);
+                Lexema = AnalysLex.yytext();
+                if(simb.sym == AnalizadorSintacticoSym.EOF)
+                    CadAux = "Token: "+CadAux+"\tIdentToken: FIN\n";
+                else{
+                    switch(simb.sym){
+                        case AnalizadorSintacticoSym.SEMICOLON:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: SEMICOLON\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.ENTER:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: Enter\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.NUM:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: NUM\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.opSUMA:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: SUMA\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.opRESTA:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: RESTA\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.opMULT:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: MULT\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.opDIV:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: DIV\t\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.ASIG:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: ASIG\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.ParIzq:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: ParIzq\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.ParDer:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: ParDer\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.error:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: error\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.POW:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: POW\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.BLTIN:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: BLTIN\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.CONST_PRED:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: CONST_PRED\t Lexema: "+Lexema+"\n";
+                        break;
+                        case AnalizadorSintacticoSym.VAR:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: VAR\t Lexema: "+Lexema+" indice="+Integer.toString((Integer) simb.value)+"\n";
+                        break;
+                        default:
+                            CadAux = "Token: "+CadAux+"\tIdentToken: OTRO\t Lexema: "+AnalysLex.yytext()+"\n";
+                        break;
+                    }
+                }
+                txtLexico.append(CadAux);
+            }while(simb.sym != AnalizadorSintacticoSym.EOF);
+        }catch(IOException ex){
+            txtLexico.append("Entro\' al catch");
+            Logger.getLogger(HOC4JFrame.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }//GEN-LAST:event_BotonLexicoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -273,7 +273,7 @@ class CUP$AnalizadorSintactico$actions {
 
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.SYMBOL;
-                                                ins2.simbolHoc = v;
+                                                ins2.symbolHoc = v;
 
                                                 InstrucProgram ins3 =  new InstrucProgram();
                                                 ins3.TipInstr = EnumTipoInstr.INSTRUC;
@@ -298,7 +298,7 @@ class CUP$AnalizadorSintactico$actions {
 
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.SYMBOL;
-                                                ins2.simbolHoc = n;
+                                                ins2.symbolHoc = n;
 
                                                 RESULT = maquinaHoc4.code2(ins1,ins2);
                                             
@@ -319,7 +319,7 @@ class CUP$AnalizadorSintactico$actions {
 
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.SYMBOL;
-                                                ins2.simbolHoc = v;
+                                                ins2.symbolHoc = v;
 
                                                 InstrucProgram ins3 =  new InstrucProgram();
                                                 ins3.TipInstr = EnumTipoInstr.INSTRUC;
@@ -344,7 +344,7 @@ class CUP$AnalizadorSintactico$actions {
 
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.SYMBOL;
-                                                ins2.simbolHoc = n;
+                                                ins2.symbolHoc = n;
 
                                                 RESULT = maquinaHoc4.code2(ins1,ins2);
                                             
