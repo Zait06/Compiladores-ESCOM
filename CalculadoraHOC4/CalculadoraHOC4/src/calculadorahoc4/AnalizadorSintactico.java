@@ -231,12 +231,12 @@ class CUP$AnalizadorSintactico$actions {
 		  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.PRINT;
-
+                                                /*
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.INSTRUC;
-                                                ins2.Instruc = EnumInstrMaq.STOP;
+                                                ins2.Instruc = EnumInstrMaq.STOP;*/
 
-                                                maquinaHoc4.code2(ins1,ins2);
+                                                maquinaHoc4.code(ins1);
                                             
               CUP$AnalizadorSintactico$result = parser.getSymbolFactory().newSymbol("list",0, ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-2)), ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()), RESULT);
             }
@@ -249,12 +249,12 @@ class CUP$AnalizadorSintactico$actions {
 		  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.PRINT;
-
+                                                /*
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.INSTRUC;
-                                                ins2.Instruc = EnumInstrMaq.STOP;
+                                                ins2.Instruc = EnumInstrMaq.STOP;*/
 
-                                                maquinaHoc4.code2(ins1,ins2);
+                                                maquinaHoc4.code(ins1);
                                             
               CUP$AnalizadorSintactico$result = parser.getSymbolFactory().newSymbol("list",0, ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-3)), ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()), RESULT);
             }
@@ -359,7 +359,7 @@ class CUP$AnalizadorSintactico$actions {
 		int valAsgnleft = ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()).left;
 		int valAsgnright = ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()).right;
 		Integer valAsgn = (Integer)((java_cup.runtime.Symbol) CUP$AnalizadorSintactico$stack.peek()).value;
-		  RESULT=valAsgn; 
+		  RESULT = valAsgn; 
               CUP$AnalizadorSintactico$result = parser.getSymbolFactory().newSymbol("expr",2, ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()), RESULT);
             }
           return CUP$AnalizadorSintactico$result;
@@ -423,7 +423,7 @@ class CUP$AnalizadorSintactico$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-1)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-1)).right;
 		Integer e = (Integer)((java_cup.runtime.Symbol) CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-1)).value;
-		 RESULT=e; 
+		  RESULT = e; 
               CUP$AnalizadorSintactico$result = parser.getSymbolFactory().newSymbol("expr",2, ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.elementAt(CUP$AnalizadorSintactico$top-2)), ((java_cup.runtime.Symbol)CUP$AnalizadorSintactico$stack.peek()), RESULT);
             }
           return CUP$AnalizadorSintactico$result;

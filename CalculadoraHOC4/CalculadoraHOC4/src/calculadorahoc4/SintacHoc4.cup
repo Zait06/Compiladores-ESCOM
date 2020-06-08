@@ -53,22 +53,22 @@ list    ::=
         | list expr SEMICOLON               {:  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.PRINT;
-
+                                                /*
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.INSTRUC;
-                                                ins2.Instruc = EnumInstrMaq.STOP;
+                                                ins2.Instruc = EnumInstrMaq.STOP;*/
 
-                                                maquinaHoc4.code2(ins1,ins2);
+                                                maquinaHoc4.code(ins1);
                                             :}
         | list expr SEMICOLON ENTER         {:  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.PRINT;
-
+                                                /*
                                                 InstrucProgram ins2 =  new InstrucProgram();
                                                 ins2.TipInstr = EnumTipoInstr.INSTRUC;
-                                                ins2.Instruc = EnumInstrMaq.STOP;
+                                                ins2.Instruc = EnumInstrMaq.STOP;*/
 
-                                                maquinaHoc4.code2(ins1,ins2);
+                                                maquinaHoc4.code(ins1);
                                             :}
         ;
 
@@ -122,7 +122,7 @@ expr    ::= NUM:n                           {:  InstrucProgram ins1 =  new Instr
 
                                                 RESULT = maquinaHoc4.code2(ins1,ins2);
                                             :}
-        | asgn:valAsgn                      {:  RESULT=valAsgn; :}
+        | asgn:valAsgn                      {:  RESULT = valAsgn; :}
         | expr opSUMA expr                  {:  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.ADD;
@@ -143,7 +143,7 @@ expr    ::= NUM:n                           {:  InstrucProgram ins1 =  new Instr
                                                 ins1.Instruc = EnumInstrMaq.DIV;
                                                 RESULT = maquinaHoc4.code(ins1);
                                             :}
-        | ParIzq expr:e ParDer              {: RESULT=e; :}
+        | ParIzq expr:e ParDer              {:  RESULT = e; :}
         | BLTIN:fun ParIzq expr ParDer      {:  InstrucProgram ins1 =  new InstrucProgram();
                                                 ins1.TipInstr = EnumTipoInstr.INSTRUC;
                                                 ins1.Instruc = EnumInstrMaq.BLTIN;
